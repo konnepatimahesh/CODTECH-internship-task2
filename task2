@@ -1,0 +1,62 @@
+                                                                      STUDENT GRADE TRACKER
+** code description **
+   1. A Student Grade Tracker is a software application designed to help manage and track the academic performance of students. 
+   2. It allows users to input grades for various subjects or assignments, calculates the average grade, and provides a summary of the overall performance including a letter grade or GPA.
+
+# CODE #
+
+class StudentGradeTracker:
+    def __init__(self):
+        self.grades = {}
+
+    def add_grade(self, subject, grade):
+        if subject in self.grades:
+            self.grades[subject].append(grade)
+        else:
+            self.grades[subject] = [grade]
+
+    def calculate_average(self):
+        total_grades = sum([sum(grades) for grades in self.grades.values()])
+        total_subjects = sum([len(grades) for grades in self.grades.values()])
+        if total_subjects == 0:
+            return 0
+        return total_grades / total_subjects
+
+    def convert_to_letter_grade(self, average):
+        if average >= 90:
+            return 'A'
+        elif average >= 80:
+            return 'B'
+        elif average >= 70:
+            return 'C'
+        elif average >= 60:
+            return 'D'
+        else:
+            return 'F'
+
+    def display_grades(self):
+        print("Grades:")
+        for subject, grades in self.grades.items():
+            print(f"{subject}: {grades}")
+        
+        average = self.calculate_average()
+        letter_grade = self.convert_to_letter_grade(average)
+        print(f"\n Average grade: {average:.2f}")
+       
+        average = self.calculate_average()
+        letter_grade = self.convert_to_letter_grade(average)
+        print(f"\nOverall grade: {average:.2f}")
+        print(f"Letter Grade: {letter_grade}")
+
+# Example usage:
+tracker = StudentGradeTracker()
+tracker.add_grade("Math", 50)
+tracker.add_grade("English", 90)
+tracker.add_grade("Science", 68)
+tracker.add_grade("hidi", 50)
+tracker.add_grade("assignment",40)
+
+tracker.display_grades()
+
+
+
